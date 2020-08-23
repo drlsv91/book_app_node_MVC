@@ -1,0 +1,17 @@
+<%- include('../includes/head.ejs') %> 
+  </head>
+  <body>
+    <%- include('../includes/navigation.ejs') %> 
+    <main class="container">
+      <% if(orders.length > 0){ %>
+          <% for(let order of orders){ %>
+            <h1><%= order.id%></h1>
+            <% order.products.forEach(product => {%>
+                <p><%= product.title%> (<%= product.orderItem.quantity %>)</p>
+            <%}); %>
+          <% } %> 
+      <% }else{ %> 
+      <h1> Orders Is Empty</h1>
+      <% } %> 
+    </main>
+<%- include('../includes/end.ejs') %> 
