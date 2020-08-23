@@ -7,7 +7,7 @@
           <% for(let order of orders){ %>
             <h1><%= order.id%></h1>
             <% order.products.forEach(product => {%>
-                <p><%= product.title%> (<%= product.orderItem.quantity %>)</p>
+                <div><%= product.title%> (<%= product.orderItem.quantity %>)</div>
             <%}); %>
           <% } %> 
       <% }else{ %> 
