@@ -25,11 +25,11 @@
                 <td>$<%= product.price %></td>
                 <td><img src="<%= product.imageUrl %>" alt="" style="width: 50px;"></td>
                 <td><%= product.description %></td>
-                <td><a href="/admin/edit-product/<%= product.id %>?edit=true" class="btn btn-primary">Edit</a></td>
+                <td><a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn btn-primary">Edit</a></td>
                 <td>
                   <form action="/admin/delete-product" method="POST">
                     <button type="submit" class="btn btn-danger">Delete</button>
-                    <input type="hidden" name="id" value="<%= product.id %>">
+                    <input type="hidden" name="id" value="<%= product._id %>">
                   </form>
                 </td>
               </tr>

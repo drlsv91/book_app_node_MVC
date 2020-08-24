@@ -5,9 +5,9 @@
     <main class="container">
       <% if(orders.length > 0){ %>
           <% for(let order of orders){ %>
-            <h1><%= order.id%></h1>
-            <% order.products.forEach(product => {%>
-                <div><%= product.title%> (<%= product.orderItem.quantity %>)</div>
+            <h1>Your order: <%= order.user.name%></h1>
+            <% order.items.forEach(product => {%>
+                <div><%= product.title%> (<%= product.quantity %>)</div>
             <%}); %>
           <% } %> 
       <% }else{ %> 

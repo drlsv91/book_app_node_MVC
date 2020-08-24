@@ -21,7 +21,7 @@
                           <p>$<%- product.price %> </p>
                           <p><%- product.description %> </p>
                           <div class="d-flex justify-content-between align-items-center">
-                            <a href="/products/<%= product.id %> " class="btn btn-outline-success">
+                            <a href="/products/<%= product._id %>" class="btn btn-outline-success">
                                 Details
                             </a>
                             <%- include('../includes/add-to-cart.ejs', {product:product}) %> 
