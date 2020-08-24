@@ -1,11 +1,9 @@
 const { MongoClient } = require('mongodb');
+const config = require('../config/default.json');
 let _db;
 
 const mongodbConnect = (callback) => {
-  MongoClient.connect(
-    'mongodb+srv://victor:12345@book-app.xzawr.mongodb.net/shop?retryWrites=true&w=majority',
-    { useUnifiedTopology: true }
-  )
+  MongoClient.connect(config.mongodbURI, { useUnifiedTopology: true })
     .then((client) => {
       _db = client.db();
       callback();
