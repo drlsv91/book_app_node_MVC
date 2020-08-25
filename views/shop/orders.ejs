@@ -3,11 +3,13 @@
   <body>
     <%- include('../includes/navigation.ejs') %> 
     <main class="container">
+    <!-- console.log('orders - products = ', orders[0].products[0].product.title); -->
+
       <% if(orders.length > 0){ %>
           <% for(let order of orders){ %>
             <h1>Your order: <%= order.user.name%></h1>
-            <% order.items.forEach(product => {%>
-                <div><%= product.title%> (<%= product.quantity %>)</div>
+            <% order.products.forEach(item => {    %>
+                <div><%= item.product.title%> (<%= item.quantity %>)</div>
             <%}); %>
           <% } %> 
       <% }else{ %> 

@@ -7,10 +7,25 @@ const getAddProduct = (req, res, next) => {
     editing: false,
   });
 };
-
+const postProduct = async (req, res, next) => {
+  const { title, imageUrl, price, description } = req.body;
+  const product = new Product({
+    title,
+    price,
+    imageUrl,
+    description,
+    userId: req.user,
+  });
+  try {
+    await product.save();
+    res.redirect('/');
+  } catch (err) {
+    console.log(err);
+  }
+};
 const getProducts = async (req, res, next) => {
   try {
-    const products = await Product.fetchAll();
+    const products = await Product.find();
     res.render('admin/products', {
       prods: products,
       pageTitle: 'Admin | Products',
@@ -25,43 +40,14 @@ const getEditProduct = async (req, res, next) => {
   const editMode = JSON.parse(req.query.edit);
   const productId = req.params.productId;
   try {
-    const products = await Product.findById(productId);
-    if (!products) return res.redirect('/admin/products');
+    const product = await Product.findById(productId);
+    if (!product) return res.redirect('/admin/products');
     res.render('admin/edit-product', {
       pageTitle: 'Add Product',
       path: '/admin/edit-product',
       editing: editMode,
-      product: products[0],
+      product,
     });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const postProduct = async (req, res, next) => {
-  const { title, imageUrl, price, description } = req.body;
-  const userId = req.user._id;
-  const product = new Product(
-    title,
-    price,
-    imageUrl,
-    description,
-    null,
-    userId
-  );
-  try {
-    await product.save();
-    res.redirect('/');
-  } catch (err) {
-    console.log(err);
-  }
-};
-const deleteProduct = async (req, res, next) => {
-  const { id } = req.body;
-
-  try {
-    await Product.deleteById(id);
-    res.redirect('/admin/products');
   } catch (err) {
     console.log(err);
   }
@@ -69,9 +55,25 @@ const deleteProduct = async (req, res, next) => {
 
 const postEditProduct = async (req, res, next) => {
   const { title, imageUrl, price, description, id } = req.body;
-  const product = new Product(title, price, imageUrl, description, id);
+
+  const product = await Product.findById(id);
+  product.title = title;
+  product.imageUrl = imageUrl;
+  product.price = price;
+  product.description = description;
   try {
     await product.save();
+    res.redirect('/admin/products');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const deleteProduct = async (req, res, next) => {
+  const { id } = req.body;
+
+  try {
+    await Product.findOneAndDelete(id);
     res.redirect('/admin/products');
   } catch (err) {
     console.log(err);
