@@ -2,18 +2,19 @@
   </head>
   <body>
     <%- include('../includes/navigation.ejs') %> 
-    <main class="container">
+    <main class="container mt-3">
     <!-- console.log('orders - products = ', orders[0].products[0].product.title); -->
-
-      <% if(orders.length > 0){ %>
-          <% for(let order of orders){ %>
-            <h1>Your order: <%= order.user.name%></h1>
+    <% if(orders.length > 0){ %>
+      <% for(let order of orders){ %>
+        <div class="shadow-sm p-3 mt-3 bg-white rounded">
+            <h2>Order - #<%= order._id%> - <a href="/orders/<%= order._id%>" class="btn btn-sm btn-secondary">Invoice</a></h2>
             <% order.products.forEach(item => {    %>
-                <div><%= item.product.title%> (<%= item.quantity %>)</div>
+                <p class="border border-warning p-3"><%= item.product.title%> (<%= item.quantity %>) </p>
             <%}); %>
+          </div>
           <% } %> 
       <% }else{ %> 
-      <h1> Orders Is Empty</h1>
+      <p> Orders Is Empty</p>
       <% } %> 
     </main>
 <%- include('../includes/end.ejs') %> 

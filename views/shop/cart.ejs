@@ -19,6 +19,7 @@
                     Qty: <%=product.quantity%>
                   </div>
                   <form action="/cart-delete-item" method="POST" class="mt-5">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken%>">
                     <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
                     <input type="hidden" name="id" value="<%= product.productId._id%>">
                   </form>
@@ -32,9 +33,14 @@
 
                 
             <%}%>
-            <form action="/create-order" method="POST" class="text-center my-5">
+            <!-- <form action="/create-order" method="POST" class="text-center my-5">
+              <input type="hidden" name="_csrf" value="<%= csrfToken%>">
               <button class="btn btn-warning">Order Now!</button>
-          </form>
+          </form> -->
+          <div class="text-center mt-4">
+            <a href="/checkout" class="btn btn-warning">Order Now</a>
+
+          </div>
       <% } else{%>
       <h1> Your Cart is Empty </h1>
       <% } %>

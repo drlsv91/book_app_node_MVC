@@ -32,9 +32,11 @@
               </div>
           </div>
           <% } %>
-          <% } else {%>
-                <h1>No product found</h1>
-            <% }%>
-      </div>
+        </div>
+        <%- include('../includes/pagination.ejs') %>        
+        <% } else {%>
+              <h1>No product found</h1>
+          <% }%>
+      
     </main>
 <%- include('../includes/end.ejs') %> 

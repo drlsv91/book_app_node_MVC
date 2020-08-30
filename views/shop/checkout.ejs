@@ -1,0 +1,43 @@
+<%- include('../includes/head.ejs') %> 
+  </head>
+  <body>
+    <%- include('../includes/navigation.ejs') %> 
+    <main class="container mt-5">
+      <% if(products.length > 0){ %>
+          <% for(let product of products){%>
+            <div class="shadow-sm p-3 mt-3 bg-white rounded">
+              <div class="row offset-2">
+                  <div class="col-6">
+                     <p ><%=product.productId.title%></p> 
+                  </div>
+                  <div class="col-6">
+                      <p>Quantity: <%=product.quantity%></p>
+                  </div>
+              </div>  
+              <div class="text-center mt-4">
+                  <p> <strong>Total price: $<%= total %></strong> </p>
+              </div>
+            </div>   
+                
+            <%}%>
+           <div class="container text-center mt-4">
+               <form action="/create-order" method="POST">
+                   <script 
+                   src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                   data-key="pk_test_2m6H4qCxUK0fIWvn0mMkbdq400ZwjAEISn"
+                   data-amount="<%= total*100 %>"
+                   data-name="Your order"
+                   data-description="All the items you ordered"
+                   data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                   data-locale="auto"
+                   data-currency="usd"
+                   >
+                
+                    </script>
+               </form>
+           </div>
+            <!-- sk_test_51HLoIoK5NibBhwOMdMR3Tph8aY9EM9av8edkXavhcBs4TpE59Z2o4ssohZB5vha1gKpHWY7TfUtxjqzPr55ao5gm00zpotyPnW -->
+      <% } %>
+     
+    </main>
+<%- include('../includes/end.ejs') %> 

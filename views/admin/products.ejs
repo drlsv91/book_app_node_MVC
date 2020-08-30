@@ -3,45 +3,51 @@
   <body>
     <%- include('../includes/navigation.ejs') %> 
     <main class="container mt-4">
-      <h1 class="mb-4">Products</h1>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Description</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
+     
 
           <% if(prods.length > 0){ %>
+            <h1 class="mb-4">Products</h1>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Price</th>
+                  <th>Image</th>
+                  <th>Description</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
             <% for(let product of prods){ %> 
 
               <tr>
                 <td><%= product.title %> </td>
                 <td>$<%= product.price %></td>
-                <td><img src="<%= product.imageUrl %>" alt="" style="width: 50px;"></td>
+                <td><img src="/<%= product.imageUrl %>" alt="" style="width: 50px;"></td>
                 <td><%= product.description %></td>
                 <td><a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn btn-primary">Edit</a></td>
                 <td>
-                  <form action="/admin/delete-product" method="POST">
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                 
+                    <input type="hidden" name="_csrf" value="<%= csrfToken%>">
                     <input type="hidden" name="id" value="<%= product._id %>">
-                  </form>
+                    <button type="button" class="btn btn-danger" onclick="deleteProduct(this)">Delete</button>
+                  
                 </td>
               </tr>
 
             <% } %> 
+          </tbody>
+        </table>
+        <% }else{ %> 
+              <h1>No product found</h1>
         <% } %> 
-
           
 
-        </tbody>
-      </table>
+
 
      
     </main>
 <%- include('../includes/end.ejs') %> 
+
+<script src="/js/admin.js"></script>
