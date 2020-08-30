@@ -1,8 +1,6 @@
-const { Sequelize } = require('sequelize');
+// const mongoose = require('mongoose')
+// const config = require('../config/default.json')
 
-const sequelize = new Sequelize('nodejs_course', 'root', '', {
-  dialect: 'mysql',
-  host: 'localhost',
-});
-
-module.exports = sequelize;
+// mongoose.connect(config.mongodbURI, (err)=>{
+//   console.log(err)
+// })

@@ -21,7 +21,7 @@
                           <p>$<%- product.price %> </p>
                           <p><%- product.description %> </p>
                           <div class="d-flex justify-content-between align-items-center">
-                            <a href="/products/<%= product.id %> " class="btn btn-outline-success">
+                            <a href="/products/<%= product._id %>" class="btn btn-outline-success">
                                 Details
                             </a>
                             <%- include('../includes/add-to-cart.ejs', {product:product})%> 
@@ -32,9 +32,11 @@
               </div>
           </div>
           <% } %>
-          <% } else {%>
-                <h1>No product found</h1>
-            <% }%>
-      </div>
+        </div>
+        <%- include('../includes/pagination.ejs') %>        
+        <% } else {%>
+              <h1>No product found</h1>
+          <% }%>
+      
     </main>
 <%- include('../includes/end.ejs') %> 

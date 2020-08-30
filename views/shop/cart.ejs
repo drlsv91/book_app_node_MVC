@@ -9,32 +9,38 @@
               <div class="d-flex mt-3 justify-content-between border-top border-bottom">
                 <div class="d-flex ">
                 <div class="">
-                  <img src="<%=product.imageUrl%>" class="card-img" style="width: 250px;">
+                  <img src="<%=product.productId.imageUrl%>" class="card-img" style="width: 250px;">
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title"><%=product.title%></h5>
-                  <p class="card-text"><%=product.description%></p>
+                  <h5 class="card-title"><%=product.productId.title%></h5>
+                  <p class="card-text"><%=product.productId.description%></p>
                   
                   <div class="border p-3" style="width: 100px;">
-                    Qty: <%=product.cartItem.quantity%>
+                    Qty: <%=product.quantity%>
                   </div>
                   <form action="/cart-delete-item" method="POST" class="mt-5">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken%>">
                     <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
-                    <input type="hidden" name="id" value="<%= product.id%>">
+                    <input type="hidden" name="id" value="<%= product.productId._id%>">
                   </form>
                 </div>
               </div>
               <div class="font-weight-bolder">
-                <p>$<%= product.price%></p>
+                <p>$<%= product.productId.price%></p>
               </div>
               </div>
 
 
                 
             <%}%>
-            <form action="/create-order" method="POST" class="text-center my-5">
+            <!-- <form action="/create-order" method="POST" class="text-center my-5">
+              <input type="hidden" name="_csrf" value="<%= csrfToken%>">
               <button class="btn btn-warning">Order Now!</button>
-          </form>
+          </form> -->
+          <div class="text-center mt-4">
+            <a href="/checkout" class="btn btn-warning">Order Now</a>
+
+          </div>
       <% } else{%>
       <h1> Your Cart is Empty </h1>
       <% } %>

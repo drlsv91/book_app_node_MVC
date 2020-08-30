@@ -1,23 +1,52 @@
-const { Sequelize, Model, DataTypes } = require('sequelize');
+const mongoose = require('mongoose');
 
-const sequelize = require('../utils/database');
+const productSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  price: { type: Number, required: true },
+  imageUrl: { type: String, required: true },
+  description: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+});
 
-class Product extends Model {}
+// const { getDb } = require('../utils/database');
+// const mongodb = require('mongodb');
+// function getId(id) {
+//   return id ? new mongodb.ObjectId(id) : null;
+// }
 
-Product.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true,
-    },
-    price: { type: DataTypes.DOUBLE, allowNull: false },
-    imageUrl: { type: DataTypes.STRING, allowNull: false },
-    title: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.TEXT, allowNull: false },
-  },
-  { sequelize, modelName: 'product' }
-);
+// class Product {
+//   constructor(title, price, imageUrl, description, id, userId) {
+//     this.title = title;
+//     this.price = price;
+//     this.imageUrl = imageUrl;
+//     this.description = description;
+//     this._id = getId(id);
+//     this.userId = userId;
+//   }
 
-module.exports = Product;
+//   save() {
+//     let db = getDb();
+//     if (this._id) {
+//       return db
+//         .collection('products')
+//         .updateOne({ _id: getId(this._id) }, { $set: this });
+//     } else {
+//       return db.collection('products').insertOne(this);
+//     }
+//   }
+
+//   static fetchAll() {
+//     let db = getDb();
+//     return db.collection('products').find().toArray();
+//   }
+//   static findById(id) {
+//     let db = getDb();
+//     return db.collection('products').findOne({ _id: getId(id) });
+//   }
+//   static deleteById(id) {
+//     let db = getDb();
+//     return db.collection('products').deleteOne({ _id: getId(id) });
+//   }
+// }
+
+module.exports = mongoose.model('Product', productSchema);
